@@ -1,65 +1,64 @@
-import Head from 'next/head'
-import Image from 'next/image'
+import Head from "next/head";
 
-import styles from '@/pages/index.module.css'
+import Input from "@components/input";
+import { PrimaryButton } from "@components/button/styled";
+import Spinner from "@components/icon/spinner";
+import { useContext } from "react";
+import {
+  Header,
+  HeaderError,
+  SearchFieldSet,
+  SearchForm,
+  TableSection,
+} from "modules/mainPage/styled";
+import CompanyDataTable from "modules/mainPage/dataTable";
+import { CompanyDataContext } from "utils/context/companyDataContext";
 
 export default function Home() {
+  const { events, states, helper } = useContext(CompanyDataContext);
+
+  const { companyData, value, isLoading, errorAndMessage, starredQty } = states;
+  const { setValue } = events;
+  const { handleFetchData } = helper;
+
   return (
-    <div className={styles.container}>
+    <>
       <Head>
         <title>Create Next App</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Header>
+        <h2>Let's search for a company</h2>
+        <h4>Total Star: {starredQty}</h4>
+      </Header>
 
-      <main>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <SearchForm
+        onSubmit={(e) => {
+          handleFetchData(e);
+        }}
+      >
+        <SearchFieldSet>
+          <Input
+            id="searchCompany"
+            label="Search for Company"
+            value={value}
+            setValue={setValue}
+          />
+          <PrimaryButton type="submit">Search</PrimaryButton>
+        </SearchFieldSet>
+      </SearchForm>
 
-        <p className={styles.description}>
-          Get started by editing <code>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a href="https://vercel.com/new" className={styles.card}>
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
-    </div>
-  )
+      {isLoading && <Spinner />}
+      {!isLoading && !errorAndMessage.error && (
+        <TableSection>
+          <CompanyDataTable data={companyData} />
+        </TableSection>
+      )}
+      {!isLoading && errorAndMessage.error && (
+        <HeaderError>
+          <h2>{errorAndMessage.message}</h2>
+        </HeaderError>
+      )}
+    </>
+  );
 }
