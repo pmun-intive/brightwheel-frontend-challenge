@@ -1,23 +1,23 @@
-
 # Brightwheel Challenge
 
 This repo was with node v16.18.0. Probably only with version 16+ it is going to work properly.
 
 ## Running
 
-To begin run: 
+To begin run:
 
 ```bash
   npm install
 ```
 
-After this process is finished it is necessary run the project with the command: 
+After this process is finished it is necessary run the project with the command:
 
 ```bash
   npm run dev
 ```
 
 If the tests need to be run just try
+
 ```bash
   npm run test
 ```
@@ -25,13 +25,14 @@ If the tests need to be run just try
 If the api is using another route, just change the api location inside the environment variable at .env file.
 
 Just insert whatever is the route after the `=`
+
 ```bash
 NEXT_PUBLIC_API_ROUTE=
 ```
 
 ## Considerations
 
-This project was done with styled-components as I had some previous knowledge using it. 
+This project was done with styled-components as I had some previous knowledge using it.
 
 The kiwi-components lib was added only to be easier to deal with tables and modal that were semantic.
 
@@ -47,3 +48,8 @@ Every time a new data is entered the spinner appears again reloading. There is w
 
 Next js was used because it would help creating better SEO and it was fast configuring route changes, testing and typescript.
 
+## Demo
+
+A demo was deployed to vercel and can be found here
+
+[https://brightwheel-frontend-challenge.vercel.app/](https://brightwheel-frontend-challenge.vercel.app/)
