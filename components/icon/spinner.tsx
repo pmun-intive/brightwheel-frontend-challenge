@@ -3,6 +3,15 @@ interface SpinnerProps {
   height?: string;
 }
 
+/**
+ * @component
+ * @name Spinner
+ * @description Icon that creates a loading animation.
+ * @namespace components components/icon/spinner
+ * @param {string} width - Sets the width for the icon
+ * @param {string} height - Sets the height for the icon
+ */
+
 const Spinner: React.FC<SpinnerProps> = ({
   width = "100px",
   height = "100px",

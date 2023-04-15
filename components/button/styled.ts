@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+/**
+ * @component
+ * @name Button
+ * @description Creates the version for the primary button.
+ * @namespace components components/button/styled
+ */
 export const PrimaryButton = styled.button`
   background-color: ${(props) => props.theme.colors.red[100]};
   border: 0;
