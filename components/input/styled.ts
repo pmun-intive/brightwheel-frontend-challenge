@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const InputGroup = styled.div`
   position: relative;
-  margin: 20px 0;
+  margin: 0;
 
   label {
     color: ${(props) => props.theme.colors.black[100]};
@@ -13,18 +13,19 @@ export const InputGroup = styled.div`
     position: absolute;
     pointer-events: none;
     transform: translateY(-50%);
-    transition: 0.3s;
+    transition: 0.2s;
     top: 50%;
   }
   input {
     border: 0;
-    background: rgba(255, 255, 255, 0.4);
+    background: transparent;
+    border-radius: 4px;
     color: ${(props) => props.theme.colors.black[200]};
     font-size: 1rem;
     font-family: Roboto, sans-serif;
     height: 56px;
     outline: 0;
-    padding: 28px 17px 8px;
+    padding: 16px 0 0 8px;
     width: 100%;
   }
   & input:focus ~ label,
