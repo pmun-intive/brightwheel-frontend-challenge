@@ -47,9 +47,3 @@ The way error is handled is pretty basic and it has ways to make it better. Prob
 Every time a new data is entered the spinner appears again reloading. There is ways of improvements where I could do pagination or caching the data avoiding the loading icon to appear constantly.
 
 Next js was used because it would help creating better SEO and it was fast configuring route changes, testing and typescript.
-
-## Demo
-
-A demo was deployed to vercel and can be found here
-
-[https://brightwheel-frontend-challenge.vercel.app/](https://brightwheel-frontend-challenge.vercel.app/)
