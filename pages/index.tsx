@@ -17,7 +17,7 @@ import { CompanyDataContext } from "utils/context/companyDataContext";
 export default function Home() {
   const { events, states, helper } = useContext(CompanyDataContext);
 
-  const { companyData, value, isLoading, errorAndMessage, starredQty } = states;
+  const { value, isLoading, errorAndMessage, starredQty } = states;
   const { setValue } = events;
   const { handleFetchData } = helper;
 
@@ -51,7 +51,7 @@ export default function Home() {
       {isLoading && <Spinner />}
       {!isLoading && !errorAndMessage.error && (
         <TableSection>
-          <CompanyDataTable data={companyData} />
+          <CompanyDataTable />
         </TableSection>
       )}
       {!isLoading && errorAndMessage.error && (

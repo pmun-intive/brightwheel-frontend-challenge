@@ -18,12 +18,9 @@ import { TableButton, TableButtonTransparent } from "./styled";
  * @name CompanyDataTable
  * @description Creates a table responsible for rendering company data
  * @namespace modules mainPage/dataTable
- * @param {Company[]} data - responsible to show company data.
  */
-const CompanyDataTable: React.FC<Pick<CompanyResponse, "data">> = ({
-  data,
-}) => {
-  const { helper } = useContext(CompanyDataContext);
+const CompanyDataTable: React.FC = () => {
+  const { helper, states } = useContext(CompanyDataContext);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [imageSrc, setImageSrc] = useState<string>("");
   const handleOpenImage = (imagePath: string) => {
@@ -31,6 +28,7 @@ const CompanyDataTable: React.FC<Pick<CompanyResponse, "data">> = ({
     setShowModal(true);
   };
 
+  const { companyData } = states;
   const { patchStar } = useSearchApi();
 
   const updateStarred = async (companyId: string, starred: boolean) => {
@@ -54,19 +52,19 @@ const CompanyDataTable: React.FC<Pick<CompanyResponse, "data">> = ({
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((companyData) => {
+          {companyData.map((singleData) => {
             return (
-              <TableRow key={companyData.id}>
-                <TableCell>{companyData.name}</TableCell>
-                <TableCell>{companyData.description}</TableCell>
+              <TableRow key={singleData.id}>
+                <TableCell>{singleData.name}</TableCell>
+                <TableCell>{singleData.description}</TableCell>
                 <TableCell>
-                  {companyData.address.address1} - {companyData.address.city}
+                  {singleData.address.address1} - {singleData.address.city}
                 </TableCell>
                 <TableCell align="center" verticalAlign="middle">
-                  {companyData.starred ? (
+                  {singleData.starred ? (
                     <TableButtonTransparent
                       onClick={() =>
-                        updateStarred(companyData.id, !companyData.starred)
+                        updateStarred(singleData.id, !singleData.starred)
                       }
                     >
                       <Star background="#FFC000" height="20px" width="20px" />
@@ -74,7 +72,7 @@ const CompanyDataTable: React.FC<Pick<CompanyResponse, "data">> = ({
                   ) : (
                     <TableButtonTransparent
                       onClick={() =>
-                        updateStarred(companyData.id, !companyData.starred)
+                        updateStarred(singleData.id, !singleData.starred)
                       }
                     >
                       <Star height="20px" width="20px" />
@@ -82,10 +80,10 @@ const CompanyDataTable: React.FC<Pick<CompanyResponse, "data">> = ({
                   )}
                 </TableCell>
                 <TableCell>
-                  {companyData.image ? (
+                  {singleData.image ? (
                     <TableButton
                       onClick={() =>
-                        companyData.image && handleOpenImage(companyData.image)
+                        singleData.image && handleOpenImage(singleData.image)
                       }
                     >
                       View Image
